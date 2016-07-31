@@ -1,0 +1,25 @@
+{
+  "name": "onion/blocks-installer-plugin",
+  "description": "Custom installer to allow for installation of onion specific modules",
+  "type": "composer-plugin",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Dimitar Dimitrov",
+      "email": "daghostman.dimitrov@gmail.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "composer-plugin-api": "^1.0",
+    "roave/security-advisories": "dev-master"
+  },
+  "extra": {
+    "class": "Onion\\Composer\\ModuleInstallerPlugin"
+  },
+  "autoload": {
+    "psr-4": {
+      "Onion\\": "src/"
+    }
+  }
+}
