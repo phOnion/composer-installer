@@ -1,0 +1,35 @@
+# phOnion Composer Plugin
+
+This plugin is intended to provide the functionality needed to install `onion`-specific packages to be
+installed in their appropriate directories.
+
+Although the plugin supports 3 types of packages: `Components`, `Modules` and `Templates` - templates
+is still a concept functionality as the application is in too early stage, the aim of this is to allow
+applications to offload the development of UIs from the backend (as you should do that anyway, APIs FTW)
+allowing easy deployment of the application. That being said, there is a little more information needed
+in order to understand the structure of an application.
+
+---
+
+***TL;DR***
+When creating a package, it should be named as `vendor/onion-package` (`onion-` prefix) and have type: `component` - application in its own right,
+`module` - library-like & `template` - UI
+---
+
+## Getting started
+In order to be able to use modules, you must name your packages as follows `*/onion-*`, where the `*` is a
+wildcard character, for example `acme/package` would need to be named as `acme/onion-package` to be handled
+by the plugin. This is intentional as a vendor prefix will not communicate the message and ownership of the
+code is important, hence not using `onion` as the vendor for custom packages, as well will help distinguish
+packages from the core maintainers and 3rd parties.
+
+Another requirement is the package types, which are in the root of the composer file:
+```
+{
+  // ...
+  "type": "some-supported-type",
+  // ...
+}
+```
+Currently supported types are: `component`, `module` & `template`.
+
