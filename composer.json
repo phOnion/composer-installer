@@ -1,5 +1,5 @@
 {
-  "name": "onion/blocks-installer-plugin",
+  "name": "onion/composer-install-plugin",
   "description": "Custom installer to allow for installation of onion specific modules",
   "type": "composer-plugin",
   "license": "MIT",
