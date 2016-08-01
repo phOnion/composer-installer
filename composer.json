@@ -15,7 +15,7 @@
     "roave/security-advisories": "dev-master"
   },
   "extra": {
-    "class": "Onion\\Composer\\ModuleInstallerPlugin"
+    "class": "Onion\\Composer\\OnionInstallerPlugin"
   },
   "autoload": {
     "psr-4": {

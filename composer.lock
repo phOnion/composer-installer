@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "96f602bd99d1410bbf6ef4ba07fbb253",
-    "content-hash": "4cc0a66e725821704f37ac2c621183ae",
+    "hash": "eee6c0fabf2f5bd5e0e7db3f5e8c5592",
+    "content-hash": "dab0fbbecd19a5ee5366e0b8edf41976",
     "packages": [
         {
             "name": "roave/security-advisories",
