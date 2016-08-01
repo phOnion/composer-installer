@@ -35,7 +35,7 @@ trait CommonInstallerTrait
 
     protected function installConfigurationFiles(PackageInterface $package)
     {
-        $moduleConfigurationPath = $this->getInstallPath($package) . '/config';
+        $moduleConfigurationPath = realpath($this->getInstallPath($package) . '/config');
 
         $configDirectory = 'config/' .
             $this->translatePackageNameToInstallPath(
