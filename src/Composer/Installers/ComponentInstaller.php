@@ -10,10 +10,12 @@ use Composer\Package\PackageInterface;
 use Composer\Repository\InstalledRepositoryInterface;
 use Onion\Composer\Installers\Interfaces\InstallerInterface;
 use Onion\Composer\Installers\Traits\CommonInstallerTrait;
+use Onion\Composer\Installers\Traits\TestRunnerTrait;
 
 class ComponentInstaller extends LibraryInstaller implements InstallerInterface
 {
     use CommonInstallerTrait;
+    use TestRunnerTrait;
 
     public function supports($packageType):bool
     {
@@ -43,8 +45,13 @@ class ComponentInstaller extends LibraryInstaller implements InstallerInterface
     public function install(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
         parent::install($repo, $package);
-
-        $this->installConfigurationFiles($package);
+        try {
+            $this->runPackageTests($this->getInstallPath($package));
+            $this->installConfigurationFiles($package);
+        } catch (\RuntimeException $ex) {
+            $this->io->writeError($ex->getMessage());
+            $this->uninstall($repo, $package);
+        }
     }
 
     public function uninstall(InstalledRepositoryInterface $repo, PackageInterface $package)
@@ -56,7 +63,12 @@ class ComponentInstaller extends LibraryInstaller implements InstallerInterface
     public function update(InstalledRepositoryInterface $repo, PackageInterface $initial, PackageInterface $target)
     {
         $this->uninstallConfigurationFiles($initial);
-        parent::update($repo, $initial, $target);
-        $this->installConfigurationFiles($target);
+        try {
+            parent::update($repo, $initial, $target);
+            $this->installConfigurationFiles($target);
+        } catch (\RuntimeException $ex) {
+            $this->io->writeError($ex->getMessage());
+            $this->install($repo, $initial);
+        }
     }
 }
