@@ -69,6 +69,10 @@ trait CommonInstallerTrait
 
         $packageConfigDir = 'config/' . $this->translatePackageNameToInstallPath($package->getPrettyName());
 
+        if (!is_dir($packageConfigDir)) {
+            return;
+        }
+
         $wiped = true;
         foreach (glob($packageConfigDir . '/*.php') as $item) {
             unlink($item);
