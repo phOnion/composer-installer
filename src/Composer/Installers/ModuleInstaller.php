@@ -42,19 +42,10 @@ class ModuleInstaller extends LibraryInstaller implements InstallerInterface
     public function install(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
         parent::install($repo, $package);
-        $this->installConfigurationFiles($package);
-    }
-
-    public function uninstall(InstalledRepositoryInterface $repo, PackageInterface $package)
-    {
-        parent::uninstall($repo, $package);
-        $this->uninstallConfigurationFiles($package);
     }
 
     public function update(InstalledRepositoryInterface $repo, PackageInterface $initial, PackageInterface $target)
     {
-        $this->uninstallConfigurationFiles($initial);
         parent::update($repo, $initial, $target);
-        $this->installConfigurationFiles($target);
     }
 }
