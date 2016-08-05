@@ -13,10 +13,10 @@ trait TestRunnerTrait
     public function getPhpunitExecutablePath():string
     {
         if (0 !== strpos(PHP_OS, 'WIN')) {
-            return glob('{*/bin,bin}phpunit', GLOB_BRACE)[0];
+            return glob(ROOT_DIR . '{*/bin,/bin}/phpunit', GLOB_BRACE)[0];
         }
 
-        return glob('{*/bin,bin}/phpunit.bat', GLOB_BRACE)[0];
+        return glob(ROOT_DIR .'{*/bin,bin}/phpunit.bat', GLOB_BRACE)[0];
     }
 
     public function runPackageTests(string $installPath)
