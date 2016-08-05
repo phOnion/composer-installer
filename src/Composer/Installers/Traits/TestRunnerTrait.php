@@ -30,9 +30,12 @@ trait TestRunnerTrait
         $coverageDir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . md5($installPath);
         $command = sprintf(
             '%s --coverage-xml %s --bootstrap %s --strict-coverage --report-useless-tests ' .
-            '--disallow-test-output --disallow-todo-tests' .
+            '--disallow-test-output --disallow-todo-tests ' .
+            '--disallow-resource-usage --enforce-time-limit ' .
             '--no-globals-backup --process-isolation ' .
-            '--stop-on-warning',
+            '--stop-on-failure --stop-on-error ' .
+            '--stop-on-incomplete --stop-on-warning ' .
+            '--stop-on-risky --stop-on-incomplete',
             $this->getPhpunitExecutablePath(),
             $coverageDir,
             ROOT_DIR . '/vendor/autoload.php'
