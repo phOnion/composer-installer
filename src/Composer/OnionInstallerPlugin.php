@@ -17,7 +17,10 @@ class OnionInstallerPlugin implements PluginInterface
 {
     public function activate(Composer $composer, IOInterface $io)
     {
-        $composer->getConfig();
+        if (!defined('ROOT_DIR')) {
+            define('ROOT_DIR', getcwd());
+        }
+
         $installationManager = $composer->getInstallationManager();
         $installationManager->addInstaller(
             new ModuleInstaller(
