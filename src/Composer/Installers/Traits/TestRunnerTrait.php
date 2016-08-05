@@ -39,7 +39,7 @@ trait TestRunnerTrait
         exec($command, $output, $testsResult);
 
         if ($testsResult !== 0) {
-            throw new \RuntimeException("Tests for %s failed with \n\n . " . $output);
+            throw new \RuntimeException("Tests for %s failed with \n\n . " . implode(PHP_EOL, $output));
         }
 
         $xml = new \SimpleXMLElement($coverageDir . '/index.xml', null, true);
