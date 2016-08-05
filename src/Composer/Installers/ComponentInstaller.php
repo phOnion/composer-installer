@@ -49,8 +49,8 @@ class ComponentInstaller extends LibraryInstaller implements InstallerInterface
             $this->runPackageTests($this->getInstallPath($package));
             $this->installConfigurationFiles($package);
         } catch (\RuntimeException $ex) {
-            $this->io->writeError($ex->getMessage());
             $this->uninstall($repo, $package);
+            throw $ex;
         }
     }
 
@@ -67,8 +67,8 @@ class ComponentInstaller extends LibraryInstaller implements InstallerInterface
             parent::update($repo, $initial, $target);
             $this->installConfigurationFiles($target);
         } catch (\RuntimeException $ex) {
-            $this->io->writeError($ex->getMessage());
             $this->install($repo, $initial);
+            throw $ex;
         }
     }
 }

@@ -48,8 +48,8 @@ class ModuleInstaller extends LibraryInstaller implements InstallerInterface
         try {
             $this->runPackageTests($this->getInstallPath($package));
         } catch (\RuntimeException $ex) {
-            $this->io->writeError($ex->getMessage());
             $this->uninstall($repo, $package);
+            throw $ex;
         }
     }
 
@@ -59,9 +59,9 @@ class ModuleInstaller extends LibraryInstaller implements InstallerInterface
         try {
             $this->runPackageTests($this->getInstallPath($target));
         } catch (\RuntimeException $ex) {
-            $this->io->writeError($ex->getMessage());
             $this->uninstall($repo, $target);
             $this->install($repo, $initial);
+            throw $ex;
         }
     }
 }
