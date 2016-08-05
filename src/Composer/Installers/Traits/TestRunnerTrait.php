@@ -29,12 +29,13 @@ trait TestRunnerTrait
         chdir($installPath);
         $coverageDir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . md5($installPath);
         $command = sprintf(
-            '%s --coverage-xml %s --strict-coverage --report-useless-tests ' .
+            '%s --coverage-xml %s --bootstrap %s --strict-coverage --report-useless-tests ' .
             '--disallow-test-output --disallow-todo-tests' .
             '--no-globals-backup --process-isolation ' .
             '--stop-on-warning',
             $this->getPhpunitExecutablePath(),
-            $coverageDir
+            $coverageDir,
+            ROOT_DIR . '/vendor/autoload.php'
         );
         exec($command, $output, $testsResult);
 
